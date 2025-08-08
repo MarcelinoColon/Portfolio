@@ -1,16 +1,83 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<div class="container-fluid p-2" style="background-color:rgba(249,250,251,255)">
+    <div class="card p-4 mb-4">
+        <h6>
+            <i class="bi bi-person-raised-hand me-1"></i>
+            <strong>Sobre mí</strong>
+        </h6>
+        <p>Mi nombre es ...</p>
+    </div>
 
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="@proyecto">
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Ver mas</a>
+    <div class="container p-4 border rounded mb-4" style="background-color:white">
+        <h6>
+            <i class="bi bi-briefcase-fill me-1"></i>
+            <strong>Proyectos realizados</strong>
+        </h6>
+        <p>Algunos de los proyectos que he desarrollado para demostrar mis habilidades</p>
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="card shadow-sm">
+                    <div class="aspect-5-3">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/api-ecommerce-backend-axCaXPVwZ85OL1n53bdheGSFF8BvnM.png"
+                             alt="@proyecto">
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title"><strong>Card title</strong></h6>
+                        <p class="text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h6 class="text-muted">Tecnologías:</h6>
+                        <span class="badge bg-light text-dark">ASP .NET</span>
+                        <span class="badge bg-light text-dark">Blazor</span>
+                        <span class="badge bg-light text-dark">C#</span>
+                        <div class="col-12 mt-2">
+                            <a href="#" class="btn btn-primary w-100">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>
+                                Ver más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card shadow-sm">
+                    <div class="aspect-5-3">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/task-management-fullstack-DNlGkKrlzzMFVlr4X524D0b8gIcA9t.png"
+                             alt="@proyecto">
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title"><strong>Card title</strong></h6>
+                        <p class="text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h6 class="text-muted">Tecnologías:</h6>
+                        <span class="badge bg-light text-dark">ASP .NET</span>
+                        <span class="badge bg-light text-dark">Blazor</span>
+                        <span class="badge bg-light text-dark">C#</span>
+                        <div class="col-12 mt-2">
+                            <a href="#" class="btn btn-primary w-100">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>
+                                Ver más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid p-4 text-center border rounded mb-4" style="background-color:white">
+        <h4><b>¿Te quieres contactar conmigo?</b></h4>
+        <p>Estoy buscando mi primera oportunidad como desarrollador. ¡Me encantaría formar parte de tu equipo!</p>
+
+        <div class="d-flex justify-content-center gap-2 flex-wrap">
+            <button class="btn btn-primary">
+                <i class="bi bi-envelope-fill me-1"></i>
+                Contactar
+                </button>
+            <button class="btn btn-dark">
+                <i class="bi bi-cloud-arrow-down-fill me-1"></i>
+                Descargar CV
+                </button>
+        </div>
     </div>
 </div>
-
-@code{
+@code {
     private string proyecto = "CONDOMY";
 }
