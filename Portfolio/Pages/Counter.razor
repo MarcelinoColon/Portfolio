@@ -1,15 +1,50 @@
 ﻿@page "/counter"
 
+
 <PageTitle>Counter</PageTitle>
 
-<h1>Counter</h1>
+<div class="container-fluid p-2" style="background-color:rgba(249,250,251,255)">
+    <h2>Ejemplo de Markdown renderizado</h2>
 
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
+    <div class="container p-4 border rounded mb-4" style="background-color:white">
+        @((MarkupString)markdownHtml)
+    </div>
+</div>
 @code {
     private int currentCount = 0;
+    private string markdownHtml;
+
+    // Es una buena práctica definir el contenido de Markdown como una variable.
+    private string markdownText = @"
+# Bienvenido a mi proyecto ASP.NET
+
+Este es un ejemplo de cómo manejar **Markdown** en una aplicación web.
+
+## Características
+
+- Conversión de Markdown a HTML.
+- Soporte para *énfasis* y **negritas**.
+- Bloques de código.
+- Encabezados y listas.
+
+## Código de ejemplo
+
+```csharp
+// Este es un ejemplo dentro del string de Markdown
+using Markdig;
+
+var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+var html = Markdown.ToHtml(""# Hola mundo"", pipeline);
+```
+";
+
+    // OnInitialized se ejecuta una vez cuando el componente se carga.
+    // Es el lugar ideal para hacer la conversión.
+    protected override void OnInitialized()
+    {
+        var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+        markdownHtml = Markdown.ToHtml(markdownText, pipeline);
+    }
 
     private void IncrementCount()
     {
