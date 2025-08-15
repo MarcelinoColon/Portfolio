@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject IRepository repository
 
 <div class="container-fluid p-2" style="background-color:rgba(249,250,251,255)">
     <div class="card p-4 mb-4">
@@ -7,11 +8,11 @@
             <strong>Sobre mí</strong>
         </h6>
         <p style="text-align:justify">
-            Mi nombre es Marcelino Colón, soy estudiante de tercer año de Ingeniería en Sistemas Computacionales en la Universidad Católica Santo Domingo, 
-            con un fuerte interés en ingresar al mercado laboral en el área de programación. Aunque no cuento con experiencia laboral formal en este campo, 
-            he desarrollado proyectos académicos y personales utilizando .NET, aplicando principios SOLID, inversión de dependencias y siguiendo las mejores 
-            prácticas de desarrollo de software. En estos proyectos también he implementado contenedores con Docker, pruebas unitarias, configuración de CORS 
-            y despliegues en Azure, lo que me ha permitido familiarizarme con entornos reales de desarrollo y producción. Estoy entusiasmado por la oportunidad 
+            Mi nombre es Marcelino Colón, soy estudiante de tercer año de Ingeniería en Sistemas Computacionales en la Universidad Católica Santo Domingo,
+            con un fuerte interés en ingresar al mercado laboral en el área de programación. Aunque no cuento con experiencia laboral formal en este campo,
+            he desarrollado proyectos académicos y personales utilizando .NET, aplicando principios SOLID, inversión de dependencias y siguiendo las mejores
+            prácticas de desarrollo de software. En estos proyectos también he implementado contenedores con Docker, pruebas unitarias, configuración de CORS
+            y despliegues en Azure, lo que me ha permitido familiarizarme con entornos reales de desarrollo y producción. Estoy entusiasmado por la oportunidad
             de aplicar mis conocimientos en un entorno profesional y seguir creciendo en el ámbito de la programación.
         </p>
     </div>
@@ -23,13 +24,41 @@
         </h6>
         <p>Algunos de los proyectos que he desarrollado para demostrar mis habilidades</p>
         <div class="row justify-content-center">
-            <div class="col-6">
+            @foreach (var project in projects)
+            {
+                <div class="col-6">
+                    <div class="card shadow-sm">
+                        <div class="aspect-5-3">
+                            <img src="@project.FrontImage"
+                                 alt="@project.Title">
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title"><strong>@project.Title</strong></h6>
+                            <p class="text-muted card-description">
+                                @project.Description
+                            </p>
+                            <h6 class="text-muted">Tecnologías:</h6>
+                            @foreach (var tecnology in project.Tecnologies)
+                            {
+                                <span class="badge bg-light text-dark">@tecnology</span>
+                            }
+                            <div class="col-12 mt-2">
+                                <a href="#" class="btn btn-primary w-100">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>
+                                    Ver más
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @*             <div class="col-6">
                 <div class="card shadow-sm">
                     <div class="aspect-5-3">
                         <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/api-ecommerce-backend-axCaXPVwZ85OL1n53bdheGSFF8BvnM.png"
                              alt="@proyecto">
                     </div>
-                    <div class="card-body" >
+                    <div class="card-body">
                         <h6 class="card-title"><strong>Card title</strong></h6>
                         <p class="text-muted card-description">
                             Some quick example text to build on the card title and make up the bulk of the card's content.
@@ -47,8 +76,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6">
+            </div> 
+             <div class="col-6">
                 <div class="card shadow-sm">
                     <div class="aspect-5-3">
                         <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/task-management-fullstack-DNlGkKrlzzMFVlr4X524D0b8gIcA9t.png"
@@ -58,7 +87,8 @@
                         <h6 class="card-title"><strong>Card title</strong></h6>
                         <p class="text-muted card-description">
                             asdas dasd asdasdasd asdasda sdasdasda sdasdasd asdasdasd asdasdas dasdasd asdasd
-                            Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                        </p>
                         <h6 class="text-muted">Tecnologías:</h6>
                         <span class="badge bg-light text-dark">ASP .NET</span>
                         <span class="badge bg-light text-dark">Blazor</span>
@@ -71,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="container-fluid p-4 text-center border rounded mb-4" style="background-color:white">
@@ -82,14 +112,21 @@
             <button class="btn btn-primary">
                 <i class="bi bi-envelope-fill me-1"></i>
                 Contactar
-                </button>
+            </button>
             <button class="btn btn-dark">
                 <i class="bi bi-cloud-arrow-down-fill me-1"></i>
                 Descargar CV
-                </button>
+            </button>
         </div>
     </div>
 </div>
 @code {
     private string proyecto = "CONDOMY";
+
+    List<Project> projects = new();
+
+    protected override void OnInitialized()
+    {
+        projects = repository.GetProjects();
+    }
 }
